@@ -1,0 +1,11 @@
+2019-11-26 10:31:23,615 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-2 - ApplicationTimer demo: Starting application at 2019-11-26T02:31:23.615Z.
+2019-11-26 10:31:23,863 [WARN] from slick.basic.DatabaseConfig in play-dev-mode-akka.actor.default-dispatcher-2 - Use `profile` instead of `driver`. The latter is deprecated since Slick 3.2 and will be removed.
+2019-11-26 10:31:24,010 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-2 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    filters.ExampleFilter
+    filters.ExampleFilter
+    filters.AdminFilter
+    filters.UserFilter
+    play.filters.gzip.GzipFilter
+
+2019-11-26 10:31:24,015 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-2 - Application started (Dev)

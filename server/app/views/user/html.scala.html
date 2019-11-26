@@ -1,0 +1,260 @@
+@import tool.BasicInfoData
+@import tool.ResultInfo
+@import tool.PdfData
+@import models.Tables.MissionRow
+@(data: BasicInfoData, row: MissionRow, imageInfo: Map[String, String], pdf: PdfData)
+
+<style>
+
+@@font-face {
+	font-family: 'myFont';
+	src: url('http://localhost:9004/assets/fonts/simsun.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	font-family: "myFont";
+}
+
+.myH4 {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+
+.table2, .table2 tr th, .table2 tr td {
+	border: 1px solid lightgrey;
+	border-collapse: collapse;
+}
+
+.left {
+	text-indent: 1em ;
+}
+
+.right {
+	padding-right: 1em;
+}
+
+table {
+	border-spacing: 0;
+	line-height: 1.5em;
+}
+
+</style>
+
+<table style="width: 90%;
+	font-size: 12px;
+	margin-bottom: 50px" align="center" id="table4">
+	<tr>
+		<td>
+			<img style="margin-left: 5%;
+				width: 150px" src="data:image/png;base64,@imageInfo("logo")">
+		</td>
+
+		<td style="padding-top: 100px">
+			<div class="myH4" style="text-align: center;
+				margin-bottom: 20px">@data.title</div>
+			<div class="myH4" style="text-align: center;">肝纤维化和肝硬化风险检测报告单</div>
+
+		</td>
+
+		<td style="" align="right"><img style="margin-left: 5%;
+			width: 120px" src="data:image/png;base64,@imageInfo("qrCode")"></td>
+	</tr>
+</table>
+
+<table style="width: 90%;
+	font-size: 12px;
+	border: 1px solid lightgrey;
+	margin-top: 15px" align="center" >
+	<tr>
+		<td colspan="6" class="left">送检单位： @data.unit</td>
+		<td colspan="6">地址： @data.address</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="left">姓名： @data.name</td>
+		<td colspan="2">性别： @data.sex</td>
+		<td colspan="2">年龄： @data.age</td>
+		<td colspan="3">送检科室： @data.office</td>
+		<td colspan="3">申请医生： @data.doctor</td>
+	</tr>
+	<tr>
+		<td colspan="3" class="left">门诊/住院号： @data.number</td>
+		<td colspan="3">采样时间： @data.sampleTime</td>
+		<td colspan="3">送检时间： @data.submitTime</td>
+		<td colspan="3">样本号： @data.sample</td>
+	</tr>
+	<tr>
+		<td colspan="3" class="left">样本类型： @data.sampleType</td>
+		<td colspan="3">样本状态： @data.sampleStatus</td>
+	</tr>
+</table>
+
+<table style="width: 90%;
+	font-size: 12px;
+	margin-top: 15px;
+	table-layout: fixed" align="center" class="table2">
+	<tr>
+		<td colspan="4" style="text-align: center">输入值</td>
+		<td colspan="2" style="text-align: center">计算得到的得分值</td>
+		<td colspan="2" style="text-align: center">计算得到的风险</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="left">项目</td>
+		<td colspan="1" class="left">测试值</td>
+		<td colspan="1" class="left">单位</td>
+		<td colspan="2" rowspan="5" style="text-align: center">
+		@pdf.score
+		</td>
+		<td colspan="2" rowspan="5" style="text-align: center">
+		@pdf.result
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="left">年龄（Age）</td>
+		<td colspan="1" class="left">@data.age</td>
+		<td colspan="1" class="left">年</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="left">天门冬氨酸氨基转移酶（AST）</td>
+		<td colspan="1" class="left">@row.ast</td>
+		<td colspan="1" class="left">U/L</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="left">丙氨酸氨基转移酶（ALT）</td>
+		<td colspan="1" class="left">@row.alt</td>
+		<td colspan="1" class="left">U/L</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="left">血小板计数（PLT）</td>
+		<td colspan="1" class="left">@row.plt</td>
+		<td colspan="1" class="left">10^9/L</td>
+	</tr>
+
+</table>
+
+<div  style="margin-left: 5%;
+	font-size: 12px;
+	margin-top: 25px;
+	margin-bottom: 10px">风险示意图</div>
+
+<img style="margin-left: 5%;
+	width: 90%" src="data:image/png;base64,@imageInfo("barPlot")">
+
+<table style="width: 90%;
+	font-size: 12px;
+	margin-top: 20px;" align="center" class="table2">
+	<thead>
+		<tr>
+			<td class="left">受检者慢性肝病风险评分</td>
+			<td class="left">健康情况预测结果</td>
+			<td class="left">说明</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="left">0-0.25</td>
+			<td class="left">低慢性肝病风险</td>
+			<td class="left">肝脏代谢指标综合分析良好，提示比较健康，患有慢性肝病的可能性比较低。</td>
+		</tr>
+		<tr>
+			<td class="left">0.25-1</td>
+			<td class="left">高慢性肝病风险</td>
+			<td class="left">肝脏代谢指标综合分析出现异常，提示患有慢性肝病的可能性非常大。</td>
+		</tr>
+
+	</tbody>
+</table>
+
+<table style="width: 90%;
+	font-size: 12px;
+	margin-top: 20px;" align="center" class="table2">
+	<thead>
+		<tr>
+			<td class="left">受检者肝纤维化程度、肝硬化风险评分</td>
+			<td class="left right">健康情况预测结果</td>
+			<td class="left">说明</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="left">0-0.25</td>
+			<td class="left right">低慢性肝病风险</td>
+			<td class="left">肝脏代谢指标综合分析良好，提示比较健康，肝纤维化、肝硬化的可能性比较低。</td>
+		</tr>
+		<tr>
+			<td class="left">0.25-0.5</td>
+			<td class="left right">早期肝纤维化风险</td>
+			<td class="left">肝脏代谢指标综合分析出现轻微异常，提示早期肝纤维化的可能性非常大。</td>
+		</tr>
+		<tr>
+			<td class="left">0.5-0.75</td>
+			<td class="left right">晚期肝纤维化风险</td>
+			<td class="left">肝脏代谢指标综合分析出现严重异常，提示晚期肝纤维化的可能性非常大。</td>
+		</tr>
+		<tr>
+			<td class="left">0.75-1</td>
+			<td class="left right">肝硬化风险</td>
+			<td class="left">肝脏代谢指标综合分析出现警示，提示肝硬化的可能性非常大。</td>
+		</tr>
+
+	</tbody>
+</table>
+
+<table style="width: 90%;
+	font-size: 12px;
+	margin-top: 20px;" align="center" class="table2">
+	<tr>
+		<td class="left">诊断建议：</td>
+	</tr>
+	<tr style="height: 5em;">
+		<td style="">
+			<div style="margin-left: 1em;">@Html(data.danger.replaceAll("\n", "<br>"))</div>
+		</td>
+	</tr>
+
+
+</table>
+
+<table style="width: 90%;
+	font-size: 12px;
+	margin-top: 15px;
+	margin-left: 5%" id="table4">
+	<tr>
+		<td style="padding-left: 2em;
+			width: 75%">检验： @data.reporter</td>
+		<td style="width: 25%">
+			审核： @data.checker
+		</td>
+	</tr>
+	<tr>
+		<td style="padding-left: 2em;">检验日期：  @data.checkDate</td>
+		<td style="">
+			报告日期： @data.reportDate
+		</td>
+	</tr>
+</table>
+
+<table style="width: 90%;
+	font-size: 12px;
+	margin-top: 100px;
+	margin-left: 5%" id="table4">
+	<tr>
+		<td style="padding-left: 2em;
+			width: 75%;
+			vertical-align: top" align="left">
+			深圳市绘云生物科技有限公司<br>
+			Human Metabolomics Institute, Inc.
+		</td>
+
+		<td style="width: 25%" >
+			电话: 400-800-9128<br>
+			<span style="margin-left: 37px;font-size: 10px">(工作日9：00 - 17：30）</span><br>
+			邮箱: info@@hmibiotech.com<br>
+			网址: www.hmibiotech.com
+		</td>
+	</tr>
+</table>

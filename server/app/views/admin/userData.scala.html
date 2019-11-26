@@ -1,0 +1,143 @@
+@()(implicit request: RequestHeader)
+@main("用户记录")("userData") {
+	<style>
+			.genome-pre {
+				white-space: pre-wrap;
+				word-wrap: break-word;
+				border: 0px solid #ccc;
+				background-color: white;
+			}
+	</style>
+	<div class="page-content">
+
+		<div class="page-bar">
+			<ul class="page-breadcrumb">
+				<li>
+					<i class="fa fa fa-database"></i>
+					<a href="">用户记录</a>
+				</li>
+			</ul>
+		</div>
+
+
+		<div class="row-fluid">
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<div class="portlet green-jungle box">
+						<div class="portlet-title">
+							<div class="caption">
+								用户记录
+							</div>
+						</div>
+
+						<div class="portlet-body">
+							<div class="table-responsive">
+
+								<label>选择显示的列:</label>
+								<div id="checkbox" class="checkbox">
+
+								</div>
+
+								<table class="display table table-bordered" id="missionTable" data-pagination="true" data-search="true"
+								data-toolbar="#toolbar" data-page-list="[10, 25, 50, 100, all]" data-multiple-search="true"
+								data-show-export="true" data-export-types="['xlsx']" data-export-data-type="all"
+								>
+									<thead>
+										<tr>
+											<th data-field="userName" data-sortable="true">用户</th>
+											<th data-field="sampleId" data-sortable="true">样品号</th>
+											<th data-field="name" data-sortable="true">姓名</th>
+											<th data-field="age" data-sortable="true">年龄</th>
+											<th data-field="ast" data-sortable="true">AST</th>
+											<th data-field="alt" data-sortable="true">ALT</th>
+											<th data-field="plt" data-sortable="true">PLT</th>
+											<th data-field="result" data-sortable="true">结果</th>
+
+											<th data-field='unit' data-sortable='true'>送检单位</th>
+											<th data-field='address' data-sortable='true'>地址</th>
+											<th data-field='sex' data-sortable='true'>性别</th>
+											<th data-field='office' data-sortable='true'>送检科室</th>
+											<th data-field='doctor' data-sortable='true'>申请医生</th>
+											<th data-field='number' data-sortable='true'>门诊/住院号</th>
+											<th data-field='sampleTime' data-sortable='true'>采样时间</th>
+											<th data-field='submitTime' data-sortable='true'>送检时间</th>
+											<th data-field='sampleType' data-sortable='true'>样本类型</th>
+											<th data-field='sampleStatus' data-sortable='true'>样本状态</th>
+											<th data-field='title' data-sortable='true'>标题</th>
+											<th data-field='reporter' data-sortable='true'>检验</th>
+											<th data-field='checker' data-sortable='true'>审核</th>
+											<th data-field='checkDate' data-sortable='true'>检验日期</th>
+											<th data-field='reportDate' data-sortable='true'>报告日期</th>
+
+											<th data-field="endTime" data-sortable="true">时间</th>
+											<th data-field="isDelete" data-sortable="true">是否删除</th>
+										</tr>
+									</thead>
+								</table>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+
+	<script>
+
+			$(function () {
+				updateMission()
+
+				var array = ["姓名", "送检单位", "地址", "性别", "送检科室", "申请医生", "门诊/住院号", "采样时间", "送检时间",
+					 "样本类型", "样本状态", "标题", "检验", "审核", "检验日期", "报告日期"]
+				var values = ["name", "unit", "address", "sex", "office", "doctor", "number", "sampleTime", "submitTime",
+					 "sampleType", "sampleStatus", "title", "reporter", "checker", "checkDate", "reportDate"]
+				var html = ""
+				$.each(array, function (n, value) {
+							html += "<label style='margin-right: 15px'>" +
+									"<input type='checkbox' checked  value='" + values[n] + "' onclick=\"setColumns('" + values[n] + "')\">" + value +
+									"</label>"
+						}
+				);
+				$("#checkbox").append(html)
+
+				$.each(values, function (n, value) {
+					$('#missionTable').bootstrapTable('hideColumn', value);
+					$("input:checkbox[value='" + value + "']").attr("checked", false)
+				})
+
+			})
+
+			function setColumns(value) {
+				var element = $("input:checkbox[value=" + value + "]")
+				if (element.is(":checked")) {
+					$('#missionTable').bootstrapTable('showColumn', value);
+				} else {
+					$('#missionTable').bootstrapTable('hideColumn', value);
+				}
+			}
+
+			function updateMission() {
+				$.ajax({
+					url: "@routes.AdminController.getAllMission()",
+					type: "get",
+					dataType: "json",
+					success: function (data) {
+						$("#missionTable").bootstrapTable({
+							data: data,
+							exportOptions: {
+								fileName: "user_db"
+							},
+
+						})
+					}
+				})
+			}
+
+	</script>
+
+
+}

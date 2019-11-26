@@ -1,0 +1,87 @@
+
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET         /                                                  controllers.AppController.loginBefore
+
+POST        /liveBoost/login                                   controllers.AppController.login
+GET         /liveBoost/registerBefore                          controllers.AppController.registerBefore
+POST        /liveBoost/userNameCheck                           controllers.AppController.userNameCheck
+POST        /liveBoost/register                                controllers.AppController.register
+POST        /liveBoost/emailCheck                              controllers.AppController.emailCheck
+GET         /liveBoost/registerActiveBefore                    controllers.AppController.registerActiveBefore
+GET         /liveBoost/sendEmail                               controllers.AppController.sendEmail
+GET         /liveBoost/registerActive                          controllers.AppController.registerActive
+POST        /liveBoost/phoneCheck                              controllers.AppController.phoneCheck
+GET         /liveBoost/recoverPasswordBefore                   controllers.AppController.recoverPasswordBefore
+GET         /liveBoost/validName                               controllers.AppController.validName
+POST        /liveBoost/newPasswordActive                       controllers.AppController.newPasswordActive
+GET         /liveBoost/newPasswordBefore                       controllers.AppController.newPasswordBefore
+GET         /liveBoost/newPasswordEmailValid                   controllers.AppController.newPasswordEmailValid
+POST        /liveBoost/newPassword                             controllers.AppController.newPassword
+
+GET         /liveBoost/tool/getServerTime                      controllers.ToolController.getServerTime
+
+
+
+GET         /liveBoost/user/toIndex                            controllers.UserController.toIndex
+GET         /liveBoost/user/logout                             controllers.UserController.logout
+GET         /liveBoost/user/changePasswordBefore               controllers.UserController.changePasswordBefore
+POST        /liveBoost/user/changePassword                     controllers.UserController.changePassword
+GET         /liveBoost/user/boostBefore                        controllers.UserController.boostBefore
+GET         /liveBoost/user/reduceTimes                        controllers.UserController.reduceTimes
+GET         /liveBoost/user/getLimit                           controllers.UserController.getLimit
+GET         /liveBoost/user/toHome                             controllers.UserController.toHome
+GET         /liveBoost/user/detailInfoBefore                   controllers.UserController.detailInfoBefore
+GET         /liveBoost/user/getPdfInfo                         controllers.UserController.getPdfInfo
+POST        /liveBoost/user/updatePdfInfo                      controllers.UserController.updatePdfInfo
+
+GET         /liveBoost/user/predict/predictBefore              controllers.PredictController.predictBefore
+POST        /liveBoost/user/predict/predict                    controllers.PredictController.predict
+POST        /liveBoost/user/predict/export                     controllers.PredictController.export
+GET         /liveBoost/user/predict/downloadExampleFile        controllers.PredictController.downloadExampleFile
+GET         /liveBoost/user/predict/batchPredictBefore         controllers.PredictController.batchPredictBefore
+POST        /liveBoost/user/predict/fileCheck                  controllers.PredictController.fileCheck
+POST        /liveBoost/user/predict/batchPredict               controllers.PredictController.batchPredict
+GET         /liveBoost/user/predict/predictResult              controllers.PredictController.predictResult
+
+GET         /liveBoost/user/mission/missionManageBefore        controllers.MissionController.missionManageBefore
+GET         /liveBoost/user/mission/getAllMission              controllers.MissionController.getAllMission
+POST        /liveBoost/user/mission/deleteMissionByIds         controllers.MissionController.deleteMissionByIds
+GET         /liveBoost/user/mission/deleteMissionById          controllers.MissionController.deleteMissionById
+
+GET         /liveBoost/admin/limitManageBefore                 controllers.AdminController.limitManageBefore
+GET         /liveBoost/admin/logout                            controllers.AdminController.logout
+GET         /liveBoost/admin/getAllUser                        controllers.AdminController.getAllUser
+#GET         /liveBoost/admin/switchLimitById             controllers.AdminController.switchLimitById
+GET         /liveBoost/admin/changePasswordBefore              controllers.AdminController.changePasswordBefore
+POST        /liveBoost/admin/changePassword                    controllers.AdminController.changePassword
+GET         /liveBoost/admin/getUserById                       controllers.AdminController.getUserById
+POST        /liveBoost/admin/updateUser                        controllers.AdminController.updateUser
+GET         /liveBoost/admin/deleteUserById                    controllers.AdminController.deleteUserById
+GET         /liveBoost/admin/changeEmailBefore                 controllers.AdminController.changeEmailBefore
+POST        /liveBoost/admin/changeEmail                       controllers.AdminController.changeEmail
+GET         /liveBoost/admin/detailInfoBefore                  controllers.AdminController.detailInfoBefore
+POST        /liveBoost/admin/addDays                           controllers.AdminController.addDays
+GET         /liveBoost/admin/userDataBefore                    controllers.AdminController.userDataBefore
+GET         /liveBoost/admin/getAllMission                     controllers.AdminController.getAllMission
+GET         /liveBoost/admin/downloadDb                        controllers.AdminController.downloadDb
+
+GET         /liveBoost/admin/deleteUserData                        controllers.AdminController.deleteUserData
+
+GET         /liveBoost/test/test                               controllers.TestController.test
+GET         /liveBoost/test/refreshPdfInfo                     controllers.TestController.refreshPdfInfo
+
+GET         /javascriptRoutes                                controllers.AppController.javascriptRoutes
+
+
+# An example controller showing how to use dependency injection
+GET         /count                                             controllers.CountController.count
+# An example controller showing how to write asynchronous code
+GET         /message                                           controllers.AsyncController.message
+
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file                                      controllers.Assets.at(path="/public", file)
+      

@@ -1,0 +1,130 @@
+@()
+
+<div id="result" style="display: none">
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+			<div class="portlet green-jungle box">
+				<div class="portlet-title">
+					<div class="caption">
+						预测结果
+					</div>
+
+					<div class="actions">
+						<div class="btn-group">
+							<a class="btn green btn-outline btn-circle btn-sm" href="javascript:showExport();" data-close-others="true">
+								<i class="fa fa-pencil"></i> 导出Pdf报告
+							</a>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="portlet-body" id="noCotent">
+
+
+					<div class="tab-pane active" id="tab_1">
+						<h3>
+							<div id="single_text_1">样本号: <span id="showSampleId"></span></div>
+						</h3>
+						<h3>
+							<div id="single_text_2">姓名: <span id="showName"></span></div>
+						</h3>
+						<h3 style="display: none">
+							<div id="single_text_2">计算得到的得分值: <span id="score"></span></div>
+						</h3>
+						<div style="margin-left: 30px;margin-bottom: 30px" id="svg"></div>
+						<div style="margin-left: 30px;display: none" id="svg1"></div>
+
+						<div class="table-responsive" style="width: 60%">
+
+							<table class="display table table-bordered" data-pagination="true"
+							data-page-list="[10, 25, 50, 100, all]"
+							>
+								<thead>
+									<tr>
+										<th>受检者慢性肝病风险评分</th>
+										<th >健康情况预测结果</th>
+										<th >说明</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>0-0.25</td>
+										<td>低慢性肝病风险</td>
+										<td>肝脏代谢指标综合分析良好，提示比较健康，患有慢性肝病的可能性比较低。</td>
+									</tr>
+									<tr>
+										<td>0.25-1</td>
+										<td>高慢性肝病风险</td>
+										<td>肝脏代谢指标综合分析出现异常，提示患有慢性肝病的可能性非常大。</td>
+									</tr>
+
+								</tbody>
+							</table>
+
+						</div>
+
+						<div class="table-responsive" style="width: 60%">
+
+							<table class="display table table-bordered" data-pagination="true"
+							data-page-list="[10, 25, 50, 100, all]"
+							>
+								<thead>
+									<tr>
+										<th>受检者肝纤维化程度、肝硬化风险评分</th>
+										<th >健康情况预测结果</th>
+										<th>说明</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>0-0.25</td>
+										<td>低慢性肝病风险</td>
+										<td>肝脏代谢指标综合分析良好，提示比较健康，肝纤维化、肝硬化的可能性比较低。</td>
+									</tr>
+									<tr>
+										<td>0.25-0.5</td>
+										<td>早期肝纤维化风险</td>
+										<td>肝脏代谢指标综合分析出现轻微异常，提示早期肝纤维化的可能性非常大。</td>
+									</tr>
+									<tr>
+										<td>0.5-0.75</td>
+										<td>晚期肝纤维化风险</td>
+										<td>肝脏代谢指标综合分析出现严重异常，提示晚期肝纤维化的可能性非常大。</td>
+									</tr>
+									<tr>
+										<td>0.75-1</td>
+										<td>肝硬化风险</td>
+										<td>肝脏代谢指标综合分析出现警示，提示肝硬化的可能性非常大。</td>
+									</tr>
+
+								</tbody>
+							</table>
+
+						</div>
+
+						<pre id="suggestion1"></pre>
+					</div>
+
+
+				</div>
+
+
+				<div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<script>
+		$(function () {
+
+			PredictResult.init
+
+		})
+
+
+</script>
